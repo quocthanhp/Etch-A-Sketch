@@ -1,0 +1,31 @@
+:root {
+    --grid-rows: 1;
+    --grid-cols: 1;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;  
+}
+
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), auto);
+    grid-template-rows: repeat(var(--grid-rows), auto);
+    justify-content: center;
+    align-content: center;    
+}
+
+.grid-item {
+    min-width: 10px;
+    min-height: 10px;
+    padding: 1em;
+    border: 1px solid #ddd;
+}
