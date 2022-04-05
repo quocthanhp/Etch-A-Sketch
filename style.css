@@ -1,8 +1,3 @@
-:root {
-    --grid-rows: 1;
-    --grid-cols: 1;
-}
-
 *,
 *::before,
 *::after {
@@ -15,17 +10,13 @@
 }
 
 
-#container {
+#grid {
+    width: 500px;
+    height: 500px;
     display: grid;
-    grid-template-columns: repeat(var(--grid-cols), auto);
-    grid-template-rows: repeat(var(--grid-rows), auto);
-    justify-content: center;
-    align-content: center;    
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .grid-item {
-    min-width: 10px;
-    min-height: 10px;
-    padding: 1em;
     border: 1px solid #ddd;
 }
