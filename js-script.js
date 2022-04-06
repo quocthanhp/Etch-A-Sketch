@@ -102,6 +102,7 @@ resetBtn.addEventListener("click", () => {
 // Activates eraser to erase color
 eraserBtn = document.querySelector("#eraser");
 eraserBtn.addEventListener("click", () => {
+    rainbow=false;
     eraser=true;
     drawBtn.style.backgroundColor = "#97CAEF"; 
 });
