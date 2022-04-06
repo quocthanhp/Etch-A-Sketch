@@ -25,9 +25,11 @@ function getRandomColor() {
     let g = Math.floor(Math.random() * 255) + 1;
     return `rgb(${r},${b},${g})`;
 }
+
 // Draw
 drawBtn = document.querySelector("#draw");
-drawBtn.addEventListener("click", () => {
+drawBtn.addEventListener("mousedown", () => {
+    eraser=false;
     hover();
 });
 
@@ -49,16 +51,22 @@ function hover() {
 
 // Clear grid 
 clearBtn = document.querySelector("#clear");
-clearBtn.addEventListener("click", () => {
+clearBtn.addEventListener("mousedown", () => {
     clearGrid();
     // Ask user to set new size
-    let size = parseInt(prompt("Please enter new grid size"));
+    let size = "";
+    
+    while (!Number.isInteger(size)) {
+        size = parseInt(prompt("Please enter new grid size"));
+        if (Number.isInteger(size) && (size >= 100 || size <= 0)) {
+            size = alert("Grid size must be between 0 and 100, exclusively");
+            size = "";
+        }
+    }
 
     // Create new grid
-    if (!Number.isInteger(size)) return;
-
-    // Clear grid and create new
     createGrid(size, size);
+    eraser=false;
 })
 
 
