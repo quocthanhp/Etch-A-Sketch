@@ -16,12 +16,15 @@ function createGrid(rows, columns) {
     }
 }
 
+/* Clear all set up */
 function clearGrid() {
+   color = "";
+   rainbow = false;
+   eraser=false;
    grid.innerHTML = '';
 }
 
-createGrid(DEFAULT_SIZE, DEFAULT_SIZE);
-
+/* Choose random r, b, g value */
 function getRandomColor() {
     let r = Math.floor(Math.random() * 255) + 1;
     let b = Math.floor(Math.random() * 255) + 1;
@@ -39,27 +42,10 @@ drawBtn.addEventListener("mousedown", () => {
     hover();
 });
 
-
+// Get color chosen by user 
 function getColor(event) {
     color = event.target.value
 }
-
-// Hover handling
-function hover() {
-    cells = document.querySelectorAll('.grid-item');
-    cells.forEach((cell) => {
-        cell.addEventListener("mouseover", function(e) {
-            if (!eraser && !rainbow) {
-                e.target.style.backgroundColor = color;
-            } else if (rainbow) {
-                e.target.style.backgroundColor = getRandomColor();
-            } else {
-                e.target.style.backgroundColor = null;
-            } 
-            return;
-        });
-    });
-}   
 
 // Choose rainbow color
 rainbowBtn = document.querySelector("#rainbow");
@@ -69,9 +55,29 @@ rainbowBtn.addEventListener("click", () => {
     hover();
 });
 
-// Clear grid 
-clearBtn = document.querySelector("#clear");
-clearBtn.addEventListener("mousedown", () => {
+// Hover handling
+function hover() {
+    cells = document.querySelectorAll('.grid-item');
+    cells.forEach((cell) => {
+        cell.addEventListener("mouseover", function(e) {
+            if (!eraser && !rainbow) {
+                // Draw color chosen by user
+                e.target.style.backgroundColor = color;
+            } else if (rainbow) {
+                // Draw rainbow color
+                e.target.style.backgroundColor = getRandomColor();
+            } else {
+                // Erase
+                e.target.style.backgroundColor = null;
+            } 
+            return;
+        });
+    });
+}   
+
+// Make new grid 
+setGridBtn = document.querySelector("#new-grid");
+setGridBtn.addEventListener("mousedown", () => {
     drawBtn.style.backgroundColor = "#97CAEF"; 
     clearGrid();
     // Ask user to set new size
@@ -87,11 +93,10 @@ clearBtn.addEventListener("mousedown", () => {
 
     // Create new grid
     createGrid(size, size);
-    eraser=false;
 })
 
 
-// Reset grid color
+// Reset grid color to white
 resetBtn = document.querySelector("#reset");
 resetBtn.addEventListener("click", () => {
     rainbow=false;
@@ -107,4 +112,7 @@ eraserBtn.addEventListener("click", () => {
     drawBtn.style.backgroundColor = "#97CAEF"; 
 });
 
-
+// Default grid size
+window.onload = function() {
+    createGrid(DEFAULT_SIZE, DEFAULT_SIZE);
+};
