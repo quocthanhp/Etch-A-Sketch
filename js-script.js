@@ -1,5 +1,8 @@
 const grid = document.getElementById("grid");
+const colorPicker = document.getElementById("colorWell");
+let color = "white";
 let eraser = false;
+let rainbow = false;
 const DEFAULT_SIZE =16;
 
 // Create nxn grid of square divs
@@ -30,16 +33,25 @@ function getRandomColor() {
 drawBtn = document.querySelector("#draw");
 drawBtn.addEventListener("mousedown", () => {
     eraser=false;
+    rainbow=false;
+    drawBtn.style.backgroundColor = "#55BCC9";
+    colorPicker.addEventListener("input", getColor);
     hover();
 });
 
+
+function getColor(event) {
+    color = event.target.value
+}
 
 // Hover handling
 function hover() {
     cells = document.querySelectorAll('.grid-item');
     cells.forEach((cell) => {
         cell.addEventListener("mouseover", function(e) {
-            if (!eraser) {
+            if (!eraser && !rainbow) {
+                e.target.style.backgroundColor = color;
+            } else if (rainbow) {
                 e.target.style.backgroundColor = getRandomColor();
             } else {
                 e.target.style.backgroundColor = null;
@@ -47,11 +59,20 @@ function hover() {
             return;
         });
     });
-}     
+}   
+
+// Choose rainbow color
+rainbowBtn = document.querySelector("#rainbow");
+rainbowBtn.addEventListener("click", () => {
+    drawBtn.style.backgroundColor = "#97CAEF"; 
+    rainbow=true;
+    hover();
+});
 
 // Clear grid 
 clearBtn = document.querySelector("#clear");
 clearBtn.addEventListener("mousedown", () => {
+    drawBtn.style.backgroundColor = "#97CAEF"; 
     clearGrid();
     // Ask user to set new size
     let size = "";
@@ -73,11 +94,16 @@ clearBtn.addEventListener("mousedown", () => {
 // Reset grid color
 resetBtn = document.querySelector("#reset");
 resetBtn.addEventListener("click", () => {
-    cells.forEach((cell) => cell.style.backgroundColor = null);   
+    rainbow=false;
+    cells.forEach((cell) => cell.style.backgroundColor = null);
+    drawBtn.style.backgroundColor = "#97CAEF";   
 });
 
 // Activates eraser to erase color
 eraserBtn = document.querySelector("#eraser");
-eraserBtn.addEventListener("click", () => eraser=true);
+eraserBtn.addEventListener("click", () => {
+    eraser=true;
+    drawBtn.style.backgroundColor = "#97CAEF"; 
+});
 
 

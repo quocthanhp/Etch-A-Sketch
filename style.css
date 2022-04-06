@@ -16,6 +16,10 @@ body {
     background-color: #cafafe;
 }
 
+i.fa {
+    font-family: fontawesome !important;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -59,6 +63,7 @@ button {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: all .1s ease-in;
     border-radius: 5px;
+    cursor: pointer;
     /* ease-in: transition with low start */
     /* 1s: transition delay */
     /* all: property to apply (all here) */
@@ -72,6 +77,20 @@ button:hover {
 
 button:focus {
     background-color: #55BCC9;
+} 
+
+input:focus {
+    background-color: #55BCC9;
+} 
+
+input {
+    position: absolute; /*change position according to container */
+    opacity: 0;
+    left: 0;
+    top: 0;
+    width:100%; 
+    bottom: 0;
+    right: 0;
 }
 
 #grid {
