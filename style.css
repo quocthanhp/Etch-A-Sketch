@@ -44,6 +44,12 @@ img {
     object-fit: cover;
 }
 
+img#painter {
+    max-width: 9em;
+    max-height: 9em;
+    object-fit: cover;
+}
+
 .settings {
     grid-row: 2 / 3;
     display: flex;
@@ -54,6 +60,7 @@ img {
 } 
 
 button {
+    flex: 1;
     font-weight: 400;
     width: 50%;
     font-size: 1.25rem;
@@ -79,17 +86,12 @@ button:focus {
     background-color: #55BCC9;
 } 
 
-input:focus {
-    background-color: #55BCC9;
-} 
 
 input {
     position: absolute; /*change position according to container */
     opacity: 0;
-    left: 0;
     top: 0;
     width:100%; 
-    bottom: 0;
     right: 0;
 }
 
